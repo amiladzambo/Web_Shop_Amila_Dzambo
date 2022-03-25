@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title><%= title %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel='stylesheet' href='/stylesheets/styleCustomers.css'/>
+    <script>
+    </script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/customers/indexCustomer" style="padding: 5px; color: #5786b7;"> <b> OUVRIER </b></a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto" style="padding: 2px;">
+            <li class="nav-item active">
+                <a class="nav-link" href="/customers/indexCustomer"> Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/customers/customerPage"> My profile <span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/customers/cart" > Cart </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/customers/orders" > Orders </a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Send message to
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/customers/adminChat">Admin</a>
+                    <a class="dropdown-item" href="/customers/merchantsChat">Merchant</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <form method="post" action="/customers/searchProduct" class="form-inline my-2 my-lg-0" style="margin-right: 3%">
+        <input type="text" class="form-control mr-sm-2" placeholder="Search product..." name='searchProduct' aria-label="Search">
+        <input type="submit" class="btn btn-info my-2 my-sm-0" value ="Search" style="background-color: #263a5c;">
+    </form>
+    <form method="post" action="/customers/searchShop" class="form-inline my-2 my-lg-0">
+        <input type="text" class="form-control mr-sm-2" placeholder="Search shop..." name='searchShop' aria-label="Search">
+        <input type="submit" class="btn btn-info my-2 my-sm-0" value ="Search" style="background-color: #263a5c;">
+    </form>
+    <a href="/customers/customerPage" style="color: #5786b7;"><small style=" padding: 15px;"> <%=user%> </small></a>
+    <span class="dot2"><img src="../images/Customers_profile_pictures/<%= customer[0].profile_photo%>" class="responsive-img"></span>
+</nav>
+        <% if(products.length === 0) {%>
+            <div class="alert alert-light" role="alert" style="margin: 15% 0 0 27%; width: 50%; text-align: center;">
+                We are sorry, the product you are looking for does not exist! <br>
+                <small><a href="/customers/indexCustomer" style="color: #585d7d">Back to home page!</a></small>
+            </div>
+        <%}%>
+        <% if(products.length !== 0) {%>
+            <div class="d-flex flex-row flex-wrap my-flex-container" >
+                <% for(let i = 0; i < products.length; i++) { %>
+                        <div class="p-2 my-flex-item">
+                            <a href="/customers/product/<%=products[i].product_id%>">
+                            <img  src="../images/products/<%= products[i].photo_path[0]%>" class="responsive-img">
+                                <p style="color:#294553;">
+                                    <%= products[i].product_name %> <br>
+                                    <%= products[i].price %> KM <br>
+                                    <%= products[i].shopname%>
+                                </p>
+                            </a>
+                        </div>
+                    <%}%>
+            </div>
+        <%}%>
+
+
+</body>
+</html>

@@ -1,0 +1,234 @@
+body {
+  background: #C9E3E4;
+  font-family: Bahnschrift;
+  background: #C9E3E4 url("../images/adminbackground.jpg");
+  background-position: 1500px  3350px;
+  background-size:  3500px 2000px;
+}
+
+.login-box {
+  height: 60%;
+  width: 30%;
+  margin: 8% 0 0 35%;
+  background: #FFFFFF;
+}
+.login-form {
+  height: 60%;
+  width: 70%;
+  margin: 15% 0 0 16%;
+  padding: 10% 5%;
+}
+.login-form p {
+  text-align: center;
+  font-size: 20px;
+  padding: 15% 0 5% 0;
+  color: #263a5c;
+}
+.dot2 {
+  height: 40px;
+  width: 40px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}
+.dot2 img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.my-flex-container {
+  background-color: #FFFFFF;
+  height: 100%;
+  margin-bottom: 20px;
+  padding-left: 40px;
+}
+.my-flex-item {
+  height: 250px;
+  width: 200px;
+  margin: 40px;
+}
+.my-flex-item-2 {
+  background-color: lightgrey;
+  border: 1px dotted grey;
+}
+.my-flex-item img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+.my-flex-item p {
+  padding: 0;
+  margin-left: 2%;
+}
+.my-flex-item a {
+  padding: 0;
+  text-decoration: none;
+  color: #5786b7;
+}
+.shop-cover {
+  background-color: white;
+  height: 200px;
+}
+.shop-cover img{
+  width: 100%;
+  height: 200px;
+  border-bottom: 2px solid white;
+}
+.shop-profile {
+  width: 10%;
+  margin: -4% 0 0 45%;
+}
+.shop-profile img {
+  border: 2px solid white;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.dot {
+  height: 170px;
+  width: 170px;
+  margin: -13% 0 0 -15%;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}
+.container h4 {
+  text-align: center;
+  padding: 5% 0 0 1%;
+}
+
+#chat3 .form-control {
+  border-color: transparent;
+}
+
+#chat3 .form-control:focus  {
+  border-color: transparent;
+  box-shadow: inset 0px 0px 0px 1px transparent;
+}
+
+.badge-dot {
+  border-radius: 50%;
+  height: 10px;
+  width: 10px;
+  margin-left: 2.9rem;
+  margin-top: -.75rem;
+}
+
+.chat-app .chat {
+  margin-left: 280px;
+  border-left: 1px solid #eaeaea
+}
+.chat .chat-header {
+  padding: 15px 20px;
+  border-bottom: 2px solid #f4f7f6
+}
+
+.chat .chat-header .chat-about {
+  float: left;
+  padding-left: 10px
+}
+
+.chat .chat-history {
+  padding: 5px;
+  border-bottom: 2px solid #fff
+}
+
+.chat .chat-history ul {
+  padding: 0
+}
+.chat .chat-history ul li {
+  list-style: none;
+  margin-bottom: 30px
+}
+.chat .chat-history ul li:last-child {
+  margin-bottom: 0px
+}
+
+.chat .chat-history .message-data {
+  margin-bottom: 5px
+}
+.chat .chat-history .message-data-time {
+  color: #434651;
+  padding-left: 6px
+}
+.chat .chat-history .message {
+  color: #444;
+  padding: 10px 25px;
+  line-height: 15px;
+  font-size: 16px;
+  border-radius: 5px;
+  display: inline-block;
+  position: relative
+}
+
+.chat .chat-history .my-message {
+  background: #efefef
+}
+
+.chat .chat-history .other-message {
+  background: #e8f1f3;
+  text-align: right
+}
+
+.chat .chat-message {
+  padding: 5px;
+}
+
+.float-right {
+  float: right
+}
+
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0
+}
+
+@media only screen and (max-width: 767px) {
+  .chat-app .people-list {
+    height: 465px;
+    width: 100%;
+    overflow-x: auto;
+    background: #fff;
+    left: -400px;
+    display: none
+  }
+  .chat-app .people-list.open {
+    left: 0
+  }
+  .chat-app .chat {
+    margin: 0
+  }
+  .chat-app .chat .chat-header {
+    border-radius: 0.55rem 0.55rem 0 0
+  }
+  .chat-app .chat-history {
+    height: 300px;
+    overflow-x: auto
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+  .chat-app .chat-list {
+    height: 650px;
+    overflow-x: auto
+  }
+  .chat-app .chat-history {
+    height: 600px;
+    overflow-x: auto
+  }
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1) {
+  .chat-app .chat-list {
+    height: 480px;
+    overflow-x: auto
+  }
+  .chat-app .chat-history {
+    height: calc(100vh - 350px);
+    overflow-x: auto
+  }
+}

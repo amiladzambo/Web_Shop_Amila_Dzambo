@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title><%= title %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel='stylesheet' href='/stylesheets/styleMerchants.css'/>
+    <script>
+    </script>
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-light navbar-light">
+    <a class="navbar-brand" href="/merchants/indexMerchant" style="padding: 5px; color: #5786b7;"> <b> OUVRIER </b></a>
+    <div class="container-fluid">
+        <ul class="navbar-nav">
+            <li>
+                <a class="nav-link" href="/merchants/indexMerchant"> Home <span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/merchants/merchantPage"> My profile <span class="sr-only"></span></a>
+            </li>
+            <li>
+                <a class="nav-link" href="/merchants/products"> Add product <span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/merchants/products"> Products catalog <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+        <form method="post" action="/merchants/searchProduct" class="form-inline my-2 my-lg-0" style="margin-right: 3%">
+            <input type="text" class="form-control mr-sm-2" placeholder="Search product..." name='searchProduct' aria-label="Search">
+            <input type="submit" class="btn btn-info my-2 my-sm-0" value ="Search" style="background-color: #294553;">
+        </form>
+        <form method="post" action="/merchants/searchShop" class="form-inline my-2 my-lg-0">
+            <input type="text" class="form-control mr-sm-2" placeholder="Search shop..." name='searchShop' aria-label="Search">
+            <input type="submit" class="btn btn-info my-2 my-sm-0" value ="Search" style="background-color: #294553;">
+        </form>
+        <form action="/merchants/logout" method="post">
+            <a href="/merchants/merchantPage" style="color: #5786b7;"> <small style=" padding: 15px; color: #294553"> <%=user%> </small></a>
+            <span class="dot2"><img src="../images/Profile_pictures/<%= shop[0].profilepicture_path%>" class="responsive-img"></span>
+            <input type="submit" value="Log out" class="btn btn-info" style="background-color: #294553">
+        </form>
+    </div>
+</nav>
+    <div class="d-flex flex-row flex-wrap my-flex-container" style="margin-top: -3%;">
+        <% for(let i = 0; i < products.length; i++) { %>
+            <div class="p-2 my-flex-item">
+                <a href="/merchants/editProduct/<%=products[i].product_id%>">
+                    <img  src="../images/products/<%= products[i].photo_path[0] %>" class="responsive-img">
+                    <p style="color:#294553;">
+                        <%= products[i].product_name %> <br>
+                        <%= products[i].price %> KM <br>
+                    </p>
+                </a>
+            </div>
+        <%}%>
+    </div>
+
+</body>
+</html>

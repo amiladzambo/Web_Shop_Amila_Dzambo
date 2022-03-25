@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel='stylesheet' href='/stylesheets/styleAdmin.css'/>
+  </head>
+  <body>
+    <div class="login-box">
+       <div class="login-form">
+         <p> <b> Log in </b> </p> <br>
+         <% if(typeof alert != "undefined"){ %>
+           <div class="alert alert-warning">
+             <strong>Warning!</strong>
+             <%= alert %>
+           </div>
+         <%}%>
+         <form action="/adminLogin/login" method="post">
+           <label for="username">Username</label>
+           <input type="text" name="username" class="form-control">
+           <br> <br>
+           <label for="password">Password</label>
+           <input type="password" name="password" class="form-control">
+           <br> <br>
+           <input type="submit" value="Log in" class="btn btn-info" style="background-color: #c19361; border: white">
+           <br> <br>
+           <small><a href="/" style="color: #c19361;">Back to home page!</a></small>
+         </form>
+       </div>
+    </div>
+  </body>
+</html>

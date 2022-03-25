@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title><%= title %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/stylesheets/lightbox.css" />
+    <script src="/javascripts/lightbox-plus-jquery.js"></script>
+    <link rel='stylesheet' href='/stylesheets/styleAdmin.css'/>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/adminLogin/indexAdmin" style="padding: 5px; color: #5786b7;"> <b> OUVRIER </b></a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto" style="padding: 2px;">
+            <li class="nav-item">
+                <a class="nav-link" href="/adminLogin/indexAdmin"> Home <span class="sr-only"></span></a>
+            </li>
+        </ul>
+    </div>
+    <form method="post" action="/adminLogin/searchShop" class="form-inline my-2 my-lg-0">
+        <input type="text" class="form-control mr-sm-2" placeholder="Search shop..." name='searchShop' aria-label="Search">
+        <input type="submit" class="btn btn-info my-2 my-sm-0" value ="Search" style="background-color: #c19361;">
+    </form>
+    <form action="/adminLogin/logout" method="post">
+        <a href="/adminLogin/adminPage" style="color: #5786b7;"> <small style=" padding: 15px;"> <%=user%> </small></a>
+        <input type="submit" value="Log out" class="btn btn-info" style="background-color: #c19361">
+    </form>
+</nav>
+
+
+<div class="d-flex flex-row flex-wrap my-flex-container" style="height: 100%">
+        <div class="p-2 my-flex-item" style="height: 620px; width: 33%; margin-top: 1.5%;">
+            <img  src="../../../images/products/<%= product[0].photo_path[0] %>" class="responsive-img">
+        </div>
+        <div class="p-2 my-flex-item">
+            <span style=" font-size: 20px;"> <%=product[0].product_name %> </span> <br> <br>
+            <% if(product[0].unit > 0) { %>
+                <span style=" font-size: 12px; width: 5%; border-radius: 15px; background-color: #37ffb9; padding: 3%;"> In stock </span> <br> <br>
+            <%}%>
+            <% if(product[0].unit < 0) { %>
+                <span style=" font-size: 12px; width: 5%; border-radius: 15px; background-color: darkred; color: white; padding: 3%;"> In stock </span> <br> <br>
+            <%}%>
+            <span style=" font-size: 20px;"> <%=product[0].price %> </span> <br> <br>
+            <span style=" font-size: 15px"> <%=product[0].product_desc %> </span> <br> <br> <br> <br>
+            <span> Explore other products from this store! </span> <br>
+            <a href="/adminLogin/productsCatalog/<%= product[0].shopname %>" style="font-size: 20px; color: #263a5c;"> <%= product[0].shopname %> </a>
+        </div>
+        <div class="p-2 my-flex-item" style="height: 7%; width: 12%;">
+            <% for(let i = 0; i < product[0].photo_path.length; i++ ) { %>
+                <div class="row-photos">
+                    <a href="../../images/products/<%= product[0].photo_path[i] %>" data-lightbox="images" class="fancylight popup-btn" data-fancybox-group="light">
+                        <img class="img-fluid"  src="../../../images/products/<%= product[0].photo_path[i] %>">
+                    </a>
+                </div>
+            <%}%>
+            </div>
+        </div>
+</body>
+</html>

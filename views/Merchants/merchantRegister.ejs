@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel='stylesheet' href='/stylesheets/styleMerchants.css'/>
+</head>
+<body>
+
+    <div class="login-box" style="height: 1300px; margin-top: 0; margin-bottom: 2%">
+        <div class="login-form">
+            <p> <b> Registration </b> </p> <br>
+            <% if(typeof alert != "undefined"){ %>
+                <div class="alert alert-warning">
+                    <strong>Warning!</strong>
+                    <%= alert %>
+                </div>
+            <%}%>
+            <form action="/merchants/registration" method="post" enctype="multipart/form-data">
+                <b><small style="color: #294553"> Shop info </small></b> <br> <br>
+                <label for="shopname">Shop name</label>
+                <input type="text" name="shopname" class="form-control"> <br>
+                <label for="password">Password</label>
+                <input type="password" name="password" class="form-control"> <br>
+                <label for="phone">Telephone</label>
+                <input type="tel" name="phone" class="form-control"> <br>
+                <label for="email">Email</label>
+                <input type="email" name="email" class="form-control"> <br>
+                <label for="head_address"> Shop headquarters address </label>
+                <input type="text" name="head_address" class="form-control"> <br>
+                <label for="branch_address"> Shop branch office addresses </label>
+                <input type="text" name="branch_address" class="form-control"> <br>
+                <label for="category">Category</label>
+                <select  name="category" class="form-control">
+                    <%for(let i = 0; i < categories.length; i++) {%>
+                        <option  name="category">
+                            <%= categories[i].categoryname%>
+                        </option>
+                    <%}%>
+                </select> <br>
+                <label for="profilePicture" class="file-label">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-image-alt" viewBox="0 0 16 16">
+                        <path d="M7 2.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0zm4.225 4.053a.5.5 0 0 0-.577.093l-3.71 4.71-2.66-2.772a.5.5 0 0 0-.63.062L.002 13v2a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4.5l-4.777-3.947z"/>
+                    </svg> Add profile image </label>
+                <input type="file" name="profilePicture"  style="opacity: 0; margin-top: -12%; position: relative;" accept="image/*"> <br>
+                <b><small style="color: #294553"> Personal info </small></b> <br> <br>
+                <label for="firstname">First name</label>
+                <input type="text" name="firstname" class="form-control"> <br>
+                <label for="lastname">Last name</label>
+                <input type="text" name="lastname" class="form-control"> <br>
+                <input type="submit" value="Register" class="btn btn-info" style="background-color: #294553">
+                <br> <br>
+                <small><a href="/" style="color: #294553">Back to home page!</a></small>
+            </form>
+        </div>
+    </div>
+
+
+</body>
+</html>

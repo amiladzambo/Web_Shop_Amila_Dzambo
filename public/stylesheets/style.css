@@ -1,0 +1,83 @@
+body {
+  padding-top: 15px;
+  background: #C9E3E4 url("../images/background.jpg") 1500px 2350px;
+  background-size:  1500px 1500px;
+  font-family: Bahnschrift, serif;
+}
+#name {
+  height: 100%;
+  width: 100%;
+  font-size: 100px;
+  margin: 5% 0 0 0;
+  text-align: center;
+  color: #5786b7;
+  background-color: rgb(248, 249, 250, 0.5);
+}
+.dot2 {
+  height: 40px;
+  width: 40px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}
+.dot2 img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.my-flex-container {
+  background-color: #FFFFFF;
+  height: 100%;
+  margin-bottom: 20px;
+  padding-left: 40px;
+}
+.my-flex-item {
+  height: 250px;
+  width: 200px;
+  margin: 40px;
+}
+.my-flex-item-2 {
+  background-color: lightgrey;
+  border: 1px dotted grey;
+}
+.my-flex-item img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+.my-flex-item p {
+  padding: 0;
+  margin-left: 2%;
+}
+.my-flex-item a {
+  padding: 0;
+  text-decoration: none;
+  color: #5786b7;
+}
+.shop-cover {
+  background-color: white;
+  height: 200px;
+}
+.shop-cover img{
+  width: 100%;
+  height: 200px;
+  border-bottom: 2px solid white;
+}
+.shop-profile {
+  width: 10%;
+  margin: -4% 0 0 45%;
+}
+.shop-profile img {
+  border: 2px solid white;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.dot {
+  height: 170px;
+  width: 170px;
+  margin: -13% 0 0 -15%;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}

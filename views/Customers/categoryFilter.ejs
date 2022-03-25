@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel='stylesheet' href='/stylesheets/styleCustomers.css'/>
+  </head>
+  <body>
+
+  <!-- Navigation bar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom: 3%;">
+    <a class="navbar-brand" href="/customers/indexCustomer" style="padding: 5px; color: #5786b7;"> <b> OUVRIER </b></a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto" style="padding: 2px;">
+        <li class="nav-item active">
+          <a class="nav-link" href="/customers/indexCustomer"> Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/customers/customerPage"> My profile <span class="sr-only"></span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/customers/cart" > Cart </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/customers/orders" > Orders </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Send message to
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/customers/adminChat">Admin</a>
+            <a class="dropdown-item" href="/customers/merchantsChat">Merchant</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <form method="post" action="/customers/searchProduct" class="form-inline my-2 my-lg-0" style="margin-right: 3%">
+      <input type="text" class="form-control mr-sm-2" placeholder="Search product..." name='searchProduct' aria-label="Search">
+      <input type="submit" class="btn btn-info my-2 my-sm-0" value ="Search" style="background-color: #263a5c;">
+    </form>
+    <form method="post" action="/customers/searchShop" class="form-inline my-2 my-lg-0">
+      <input type="text" class="form-control mr-sm-2" placeholder="Search shop..." name='searchShop' aria-label="Search">
+      <input type="submit" class="btn btn-info my-2 my-sm-0" value ="Search" style="background-color: #263a5c;">
+    </form>
+    <a href="/customers/customerPage" style="color: #5786b7;"><small style=" padding: 15px; color: #263a5c;"> <%=user%> </small></a>
+    <span class="dot2"><img src="../images/Customers_profile_pictures/<%= customer[0].profile_photo%>" class="responsive-img"></span>
+  </nav>
+  <div class="d-flex flex-row flex-wrap my-flex-container"  style="margin-bottom: 3%; margin-top: -3%; background-color: #FFFFFF; height: 200px;">
+    <div class="p-2 my-flex-item" style=" height: 10%; ">
+      <form method="post" action="/customers/categoryFilter">
+        <label for="category">Select category</label>
+        <select  name="category" class="form-control">
+          <%for(let i = 0; i < categories.length; i++) {%>
+            <option  name="category">
+              <%= categories[i].categoryname%>
+            </option>
+          <%}%>
+        </select> <br>
+        <input type="submit" value="Filter" class="btn btn-info" style="background-color: #263a5c; ">
+      </form>
+    </div>
+    <div class="p-2 my-flex-item" style=" height: 10%; ">
+      <form method="post" action="/customers/sort">
+        <label for="category">Sort</label>
+        <select  name="sort" class="form-control">
+          <option  name="alphabetically"> Alphabetically </option>
+          <option  name="price" value="price"> According to price </option>
+        </select> <br>
+        <input type="submit" value="Sort" class="btn btn-info" style="background-color: #263a5c; ">
+      </form>
+    </div>
+  </div>
+  <% if(categoryFilter.length !== 0) {%>
+  <div class="d-flex flex-row flex-wrap my-flex-container"  style="margin-bottom: 3%; margin-top: -3%; background-color: #FFFFFF;">
+        <% for(let i = 0; i < categoryFilter.length; i++) { %>
+          <div class="p-2 my-flex-item">
+            <a href="/customers/product/<%=categoryFilter[i].product_id%>">
+              <img  src="../images/products/<%= categoryFilter[i].photo_path[0] %>" class="responsive-img">
+              <p style="color:#294553;">
+                <%= categoryFilter[i].product_name %> <br>
+                <%= categoryFilter[i].price %> KM <br>
+                <%= categoryFilter[i].shopname %> <br>
+              </p>
+            </a>
+          </div>
+        <%}%>
+  </div>
+  <%}%>
+  <% if(categoryFilter.length === 0) {%>
+    <div class="d-flex flex-row flex-wrap my-flex-container"  style="margin-bottom: 3%; margin-top: -3%; background-color: #FFFFFF; ">
+      <p style=" text-align: center; width: 100%;"> No items in this category! </p>
+    </div>
+  <%}%>
+  </body>
+</html>

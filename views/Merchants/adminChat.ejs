@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title><%= title %></title>
+    <meta charset="utf-8">
+    <script src="/socket.io/socket.io.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <link rel='stylesheet' href='/stylesheets/styleMerchants.css'/>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/merchants/indexMerchant" style="padding: 5px; color: #5786b7;"> <b> OUVRIER </b></a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto" style="padding: 2px;">
+                <li>
+                    <a class="nav-link" href="/merchants/indexMerchant"> Home <span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/merchants/merchantPage"> My profile <span class="sr-only">(current)</span></a>
+                </li>
+                <li>
+                    <a class="nav-link" href="/merchants/products"> Add product <span class="sr-only"></span></a>
+                </li>
+                <li>
+                    <a class="nav-link" href="/merchants/productsCatalog"> Products catalog <span class="sr-only"></span></a>
+                </li>
+                <li>
+                    <a class="nav-link" href="/merchants/orders"> Orders <span class="sr-only"></span></a>
+                </li>
+            </ul>
+        </div>
+        <form action="/merchants/logout" method="post">
+            <a href="/merchants/merchantPage" style="color: #5786b7;"> <small style=" padding: 15px; color: #294553"> <%=user%> </small></a>
+            <span class="dot2"><img src="../images/Profile_pictures/<%= shop[0].profilepicture_path%>" class="responsive-img"></span>
+            <input type="submit" value="Log out" class="btn btn-info" style="background-color: #294553">
+        </form>
+    </nav>
+    <section>
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card" id="chat3" style="border-radius: 15px;">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 col-lg-5 col-xl-4 mb-4 mb-md-0">
+                                    <div class="p-3">
+                                        <div data-mdb-perfect-scrollbar="true" style="position: relative; height: 400px; overflow: auto">
+                                            <ul class="list-unstyled mb-0">
+                                                <li class="p-2 border-bottom">
+                                                    <a href="/customers/adminChat" class="d-flex justify-content-between">
+                                                        <div class="d-flex flex-row">
+                                                            <div class="pt-1">
+                                                                <p class="fw-bold mb-0">amiladzambo</p>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-7 col-xl-8">
+                                    <div class="chat">
+                                        <div class="chat-header clearfix">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <div class="chat-about">
+                                                        <h6 class="m-b-0"> amiladzambo</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <div class="pt-3 pe-3" data-mdb-perfect-scrollbar="true" style="position: relative; display: flex;flex-direction: column-reverse; height: 400px; overflow-x: hidden; overflow-y: scroll;" class="scrollspy-example">
+                                        <% if(messages.length === 0) {%>
+                                            <div class="chat-history">
+                                                <ul class="m-b-0" id="chat">
+                                                </ul>
+                                            </div>
+                                        <%}%>
+                                        <%for (let i = 0; i < messages.length; i++) {%>
+                                            <div class="chat-history">
+                                                <ul class="m-b-0" id="chat">
+                                                    <% if(messages[i].code_from === 2) {%>
+                                                        <li class="clearfix">
+                                                            <div class="message other-message float-right">
+                                                                <%= messages[i].message %>
+                                                            </div>
+                                                        </li>
+                                                    <%}%>
+                                                    <% if(messages[i].code_from === 0) {%>
+                                                        <li class="clearfix">
+                                                            <div class="message my-message">
+                                                                <%= messages[i].message%>
+                                                            </div>
+                                                        </li>
+                                                    <%}%>
+                                                </ul>
+                                            </div>
+                                        <%}%>
+                                    </div>
+                                    <div class="text-muted d-flex justify-content-start align-items-center pe-3 pt-3 mt-2">
+                                        <input id="messageAdmin" type="text" class="form-control form-control-lg" placeholder="Type message" style="border: 1px solid lightgrey">
+                                        <button onclick="sendMessage('<%= shop[0].shop_id %>')" style="background-color: #263a5c;" class="btn btn-info my-2 my-sm-0"> Send </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+<script>
+    var socket = io.connect('ws://localhost:3000');
+    function sendMessage(id) {
+        const d = new Date();
+        let li = document.createElement('li');
+        li.className = 'clearfix';
+        let div = document.createElement('div');
+        div.className = 'message other-message float-right';
+        let mess = document.getElementById('messageAdmin').value;
+        div.textContent = mess;
+        li.appendChild(div);
+        document.getElementById('chat').appendChild(li);
+        document.getElementById('messageAdmin').value = '';
+        let message_packet = {
+            sender_id: id,
+            receiver_id: 1,
+            message: mess,
+            date: (d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds())
+        }
+        socket.emit('send_message_to_admin_merchant', message_packet);
+    }
+    socket.on('message_to_merchant', mess => {
+        let li = document.createElement('li');
+        li.className = 'clearfix';
+        let div = document.createElement('div');
+        div.className = 'message my-message';
+        div.textContent = mess.message;
+        li.appendChild(div);
+        document.getElementById('chat').appendChild(li);
+    })
+</script>
+
+</body>
+
+</html>

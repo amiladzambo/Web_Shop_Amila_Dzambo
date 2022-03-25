@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel='stylesheet' href='/stylesheets/styleCustomers.css'/>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-sm bg-light navbar-light">
+    <a class="navbar-brand" href="/customers/indexCustomer" style="padding: 5px; color: #5786b7;"> <b> OUVRIER </b></a>
+    <div class="container-fluid">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="/customers/indexCustomer"> Home </a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/customers/customerPage"> My profile <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/customers/cart" > Cart </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/customers/orders" > Orders </a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Send message to
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/customers/adminChat">Admin</a>
+                    <a class="dropdown-item" href="/customers/merchantsChat">Merchant</a>
+                </div>
+            </li>
+        </ul>
+        <form action="/customers/logout" method="post">
+            <span class="dot2"><img src="../images/Customers_profile_pictures/<%= customer[0].profile_photo%>" class="responsive-img"></span>
+            <a href="/customers/customerPage" style="color: #263a5c;"> <small style=" padding: 15px;"> <%=user%> </small></a>
+            <input type="submit" value="Log out" class="btn btn-info" style="background-color: #263a5c; border: white">
+        </form>
+    </div>
+</nav>
+    <div class="shop-cover">
+    </div>
+    <div class="shop-profile">
+        <span class="dot"><img src="../images/Customers_profile_pictures/<%= customer[0].profile_photo%>" class="responsive-img"></span>
+    </div>
+    <div class="container" style="width: 100%;  background-color: white; margin-top: -5%; margin-bottom: 2%;">
+        <div class="row">
+            <div class="col-sm">
+                <div class="login-box" style="height: 80%; width: 80%; margin: 0 0 2% 2%;">
+                    <div class="login-form" style="height: 57%; width: 80%; margin: 17% 0 0 18%;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                        </svg>
+                        <span style="color: #263a5c; font-size: 20px; "><b> Edit profile </b></span>
+                        <% if(typeof alert != "undefined"){ %>
+                            <div class="alert alert-warning">
+                                <strong>Warning!</strong>
+                                <%= alert %>
+                            </div>
+                        <%}%>
+                        <form action="/customers/updateCustomer" method="post">
+                            <label for="username">Username</label>
+                            <input type="text" name="username" class="form-control" value="<%= customer[0].username%>"> <br>
+                            <label for="firstname">First name</label>
+                            <input type="text" name="firstname" class="form-control" value="<%= customer[0].first_name%>"> <br>
+                            <label for="lastname">Last name</label>
+                            <input type="text" name="lastname" class="form-control" value="<%= customer[0].last_name%>" > <br>
+                            <label for="email">Email</label>
+                            <input type="text" name="email" class="form-control" value="<%= customer[0].email%>" > <br>
+                            <input type="submit" value="Save changes" class="btn btn-info" style="background-color: #263a5c; border: white">
+                        </form>
+                    </div>
+                    <div class="login-form" style="height: 30%; width: 80%; margin: 0 0 0 18%;">
+                        <p> <b> Change interests </b> </p> <br>
+                        <form method="post" action="/customers/changeInterests">
+                            <label for="interests">Select two or more of your interests!</label> <br>
+                                <% for(let i = 0; i < categories.length; i++){ %>
+                                <input type="checkbox" name="interest" value="<%=categories[i].categoryname%>">
+                            <label class="checkbox-inline" for="interest"> <%=categories[i].categoryname %> </label><br>
+                            <%}%>
+
+                            <input type="submit" value="Change interests" class="btn btn-info" style="background-color: #294553; border: white">
+                        </form> <br> <br>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="login-form" style=" height: 25%; width: 80%; margin: 0 0 0 22%;">
+                    <p>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-image-alt" viewBox="0 0 16 16">
+                            <path d="M7 2.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0zm4.225 4.053a.5.5 0 0 0-.577.093l-3.71 4.71-2.66-2.772a.5.5 0 0 0-.63.062L.002 13v2a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-4.5l-4.777-3.947z"/>
+                        </svg>
+                        <b> Change profile photo </b>
+                    </p> <br>
+                    <div class="mb-3">
+                        <form method="post" action="/customers/changeProfilePhoto" enctype="multipart/form-data">
+                            <input type="file"   class="form-control form-control-sm" name="newProfilePhoto" accept="image/*" > <br>
+                            <input type="submit" value="Change" class="btn btn-info" style="background-color: #294553; border: white">
+                        </form> <br> <br>
+                    </div>
+                    <div class="login-form" style="height: 25%; width: 80%; margin: 0 0 0 2%;">
+                        <p> <b> Change password </b> </p> <br>
+                        <form method="post" action="/customers/changePassword">
+                            <label for="password">New password</label>
+                            <input type="password" name="password" class="form-control"> <br>
+                            <input type="submit" value="Change password" class="btn btn-info" style="background-color: #294553; border: white">
+                        </form> <br> <br>
+                    </div>
+
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

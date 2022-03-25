@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+
+    <meta charset="utf-8">
+    <script src="/socket.io/socket.io.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel='stylesheet' href='/stylesheets/styleMerchants.css'/>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+
+        var socket =  io.connect('ws://localhost:3000');
+        socket.on('new_order', message => {
+            alert(message);
+        });
+
+        function Accept(order_id) {
+            $.ajax({
+                url: ('/merchants/accept/' + order_id),
+                method: 'post',
+            }).done(function () {
+                location.reload();
+            })
+        }
+        function Decline(order_id) {
+            $.ajax({
+                url: ('/merchants/declineOrder/' + order_id),
+                method: 'post',
+            }).done(function () {
+                location.reload();
+            })
+        }
+        function Deliver(order_id) {
+            $.ajax({
+                url: ('/merchants/deliverOrder/' + order_id),
+                method: 'post',
+            }).done(function () {
+                location.reload();
+            })
+        }
+
+    </script>
+</head>
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-light navbar-light">
+    <a class="navbar-brand" href="/merchants/indexMerchant" style="padding: 5px; color: #5786b7;"> <b> OUVRIER </b></a>
+    <div class="container-fluid">
+        <ul class="navbar-nav">
+            <li>
+                <a class="nav-link" href="/merchants/indexMerchant"> Home <span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/merchants/merchantPage"> My profile </a>
+            </li>
+            <li>
+                <a class="nav-link" href="/merchants/products"> Add product </a>
+            </li>
+            <li>
+                <a class="nav-link" href="/merchants/productsCatalog"> Products catalog </a>
+            </li>
+            <li>
+                <a class="nav-link active" href="/merchants/orders"> Orders <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+        <form action="/merchants/logout" method="post">
+            <a href="/merchants/merchantPage" style="color: #5786b7;"> <small style=" padding: 15px; color: #294553"> <%=user%> </small></a>
+            <span class="dot2"><img src="../images/Profile_pictures/<%= shop[0].profilepicture_path%>" class="responsive-img"></span>
+            <input type="submit" value="Log out" class="btn btn-info" style="background-color: #294553; border: white;">
+        </form>
+    </div>
+</nav>
+    <div class="container-sm" style="background-color: #FFFFFF; text-align: center; margin-top: 2%;">
+        <p style="font-size: 20px;"> Earnings sum: <%= earnings %> KM </p>
+    </div>
+        <div class="container-sm" style="background-color: #FFFFFF; text-align: center; margin-top: 2%;">
+            <div class="table-responsive">
+                <caption><b style="color: #294553; padding: 5px;">Pending orders</b></caption>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Order id</th>
+                        <th>Customer</th>
+                        <th>Customers email</th>
+                        <th>Product name</th>
+                        <th>Order status</th>
+                        <th>Accept</th>
+                        <th>Decline</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% for(let i = 0; i < pendingOrders.length; i++) {%>
+                        <tr>
+                            <td>
+                                <%= pendingOrders[i].order_id %>
+                            </td>
+                            <td>
+                                <%= pendingOrders[i].username %>
+                            </td>
+                            <td>
+                                <%= pendingOrders[i].email %>
+                            </td>
+                            <td>
+                                <%= pendingOrders[i].product_name %>
+                            </td>
+                            <td>
+                                <%= pendingOrders[i].order_status %>
+                            </td>
+                            <td>
+                                <button class="btn btn-info" style="background-color: #294553; border: white;" onclick="Accept('<%=pendingOrders[i].order_id%>')"> Accept </button>
+                            </td>
+                            <td>
+                                <button class="btn btn-info" style="background-color: #294553; border: white;" onclick="Decline('<%=pendingOrders[i].order_id%>')"> Decline </button>
+                            </td>
+                        </tr>
+                    <%}%>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+<div class="container-sm" style="background-color: #FFFFFF; text-align: center; margin-top: 2%;">
+    <div class="table-responsive">
+        <caption><b style="color: #294553; padding: 5px;">Accepted orders </b></caption>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Order id</th>
+                <th>Shop name</th>
+                <th>Customer</th>
+                <th>Customers email</th>
+                <th>Product name</th>
+                <th>Order status</th>
+                <th>Accept</th>
+                <th>Decline</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% for(let i = 0; i < acceptedOrders.length; i++) {%>
+                <tr>
+                    <td>
+                        <%= acceptedOrders[i].order_id %>
+                    </td>
+                    <td>
+                        <%= acceptedOrders[i].shopname %>
+                    </td>
+                    <td>
+                        <%= acceptedOrders[i].username %>
+                    </td>
+                    <td>
+                        <%= acceptedOrders[i].email %>
+                    </td>
+                    <td>
+                        <%= acceptedOrders[i].product_name %>
+                    </td>
+                    <td>
+                        <%= acceptedOrders[i].order_status %>
+                    </td>
+                    <td>
+                        <button class="btn btn-info" style="background-color: #294553" onclick="Deliver('<%=acceptedOrders[i].order_id%>')"> Deliver </button>
+                    </td>
+                    <td>
+                        <button class="btn btn-info" style="background-color: #294553" onclick="Decline('<%=acceptedOrders[i].order_id%>')"> Decline </button>
+                    </td>
+                </tr>
+            <%}%>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="container-sm" style="background-color: #FFFFFF; text-align: center; margin-top: 2%;">
+    <div class="table-responsive">
+        <caption><b style="color: #294553; padding: 5px;">All orders </b></caption>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Order id</th>
+                <th>Shop name</th>
+                <th>Customer</th>
+                <th>Customers email</th>
+                <th>Product name</th>
+                <th>Order status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% for(let i = 0; i < orders.length; i++) {%>
+                <tr>
+                    <td>
+                        <%= orders[i].order_id %>
+                    </td>
+                    <td>
+                        <%= orders[i].shopname %>
+                    </td>
+                    <td>
+                        <%= orders[i].username %>
+                    </td>
+                    <td>
+                        <%= orders[i].email %>
+                    </td>
+                    <td>
+                        <%= orders[i].product_name %>
+                    </td>
+                    <td>
+                        <%= orders[i].order_status %>
+                    </td>
+                </tr>
+            <%}%>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

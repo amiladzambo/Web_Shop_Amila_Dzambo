@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title><%= title %></title>
+    <meta charset="utf-8">
+    <script src="/socket.io/socket.io.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <link rel='stylesheet' href='/stylesheets/styleAdmin.css'/>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/adminLogin/indexAdmin" style="padding: 5px; color: #5786b7;"> <b> OUVRIER </b></a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto" style="padding: 2px;">
+                <li class="nav-item">
+                    <a class="nav-link" href="/adminLogin/indexAdmin"> Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/adminLogin/adminPage"> My profile </a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/adminLogin/indexAdmin"> Send message to customer <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+        </div>
+        <form action="/adminLogin/logout" method="post">
+            <a href="/adminLogin/adminPage" style="color: #5786b7;"> <small style=" padding: 15px;"> <%=user%> </small></a>
+            <input type="submit" value="Log out" class="btn btn-info" style="background-color: #c19361; border: white">
+        </form>
+    </nav>
+    <% if(customersChats.length === 0) {%>
+        <div class="p-3" style="width: 30%; background-color: white; margin: 2% 0 0 33%;">
+            <p> There are no customer with that name. </p>
+            <a href="/adminLogin/customersChats" style="color: #263a5c;"> Go back! </a>
+        </div>
+    <%}%>
+    <% if(customersChats.length !== 0) {%>
+    <div class="p-3"  style="width: 30%; background-color: white; margin: 2% 0 0 33%;">
+        <div class="input-group rounded mb-3">
+            <form method="post" action="/adminLogin/searchCustomerChat" class="form-inline my-2 my-lg-0">
+                <input type="text" class="form-control mr-sm-2" placeholder="Search a customer..." name='customer' aria-label="Search">
+                <input type="submit" class="btn btn-info my-2 my-sm-0" value ="Search" style="background-color: #c19361; border-color: #FFFFFF;">
+            </form>
+        </div>
+        <div data-mdb-perfect-scrollbar="true" style="position: relative; height: 400px; overflow: auto; width: 100%">
+            <% for(let i = 0; i < customersChats.length; i++){ %>
+            <ul class="list-unstyled mb-0">
+                <li class="p-2 border-bottom">
+                    <a href="/adminLogin/customersChat/<%=customersChats[i].customer_id%>" class="d-flex justify-content-between">
+                        <div class="d-flex flex-row">
+                            <div>
+                                <span class="dot2"><img src="../../images/Customers_profile_pictures/<%= customersChats[i].profile_photo%>" class="responsive-img"></span>
+                                <span class="badge bg-success badge-dot"></span>
+                            </div>
+                            <div class="pt-1">
+                                <p class="fw-bold mb-0" style="padding: 5px; color: #c19361"><%= customersChats[i].first_name%> <%= customersChats[i].last_name%></p>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+            <%}%>
+        </div>
+    </div>
+<%}%>
+</body>
+
+</html>

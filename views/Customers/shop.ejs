@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title><%= title %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/stylesheets/lightbox.css" />
+    <script src="/javascripts/lightbox-plus-jquery.js"></script>
+    <link rel='stylesheet' href='/stylesheets/styleCustomers.css'/>
+    <link rel='stylesheet' href='/stylesheets/styleCustomers.css'/>
+    <script>
+        function rate(shop) {
+            let rate = document.getElementById('rate').value;
+            $.ajax({
+                url: ('/customers/rateShop/' + shop + '/' + rate),
+                method: 'post'
+            }).done(function () {
+                let div = document.createElement('div');
+                div.className = 'alert alert-success';
+                div.textContent = "Shop rated!";
+                document.getElementById('main_div').appendChild(div);
+            });
+        }
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/customers/indexCustomer" style="padding: 5px; color: #5786b7;"> <b> OUVRIER </b></a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto" style="padding: 2px;">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/customers/indexCustomer"> Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/customers/customerPage"> My profile <span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/customers/cart" > Cart </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/customers/orders" > Orders </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Send message to
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/customers/adminChat">Admin</a>
+                        <a class="dropdown-item" href="/customers/merchantsChat">Merchant</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <form method="post" action="/customers/searchProduct" class="form-inline my-2 my-lg-0" style="margin-right: 3%">
+            <input type="text" class="form-control mr-sm-2" placeholder="Search product..." name='searchProduct' aria-label="Search">
+            <input type="submit" class="btn btn-info my-2 my-sm-0" value ="Search" style="background-color: #585d7d;">
+        </form>
+        <form method="post" action="/customers/searchShop" class="form-inline my-2 my-lg-0">
+            <input type="text" class="form-control mr-sm-2" placeholder="Search shop..." name='searchShop' aria-label="Search">
+            <input type="submit" class="btn btn-info my-2 my-sm-0" value ="Search" style="background-color: #585d7d;">
+        </form>
+        <a href="/customers/customerPage" style="color: #5786b7;"><small style=" padding: 15px;"> <%=user%> </small></a>
+        <span class="dot2"><img src="../../../images/Customers_profile_pictures/<%= customer[0].profile_photo%>" class="responsive-img"></span>
+    </nav>
+
+    <div class="shop-cover">
+            <img src="../../images/Cover_pictures/<%= shop[0].coverimage_path%>" class="responsive-img">
+    </div>
+    <div class="shop-profile">
+        <span class="dot"><img src="../../images/Profile_pictures/<%= shop[0].profilepicture_path%>" class="responsive-img"></span>
+    </div>
+
+    <div class="container" style="width: 100%; background-color: white; margin-top: -5%; margin-bottom: 2%;">
+        <div class="row">
+            <div class="col-sm" style="text-align: center; margin-top: 7%">
+                <span style=" font-size: 25px; color: #263a5c;"> <%=shop[0].shopname %> </span> <br> <br>
+                <span style=" font-size: 20px;"> <%=shop[0].categoryname %> </span> <br> <br>
+                <span style=" font-size: 20px;"> <%=shop[0].headquaters_address %> </span> <br> <br>
+                <a href="mailto: <%=shop[0].email %> "> <span style=" font-size: 20px; color: #5786b7"> <%=shop[0].email %> </span></a> <br> <br>
+                <span style=" font-size: 20px;"> <%=shop[0].telephone %> </span> <br> <br>
+                <div id="main_div">  </div>
+                <label for="rate" class="form-label" style=" font-size: 20px;">Rate this shop: </label>
+                <input type="number" id="rate" min="1" max="5" value="1" class="form-range">
+                <button class="btn btn-info" onclick="rate('<%= shop[0].shop_id%>')" style="color: #263a5c; background-color: #FFFFFF; border: 1px solid #263a5c;"> Rate </button>
+            </div>
+        </div>
+        <div class="row">
+        <% for(let i = 0; i < shop.length; i++) { %>
+        <div class="p-2 my-flex-item">
+            <a href="/customers/product/<%=shop[i].product_id%>">
+                <img  src="../../images/products/<%= shop[i].photo_path[0]%>" class="responsive-img">
+                <p style="color:#294553;">
+                    <%= shop[i].product_name %> <br>
+                    <%= shop[i].price %> KM <br>
+                    <%= shop[i].shopname%>
+                </p>
+            </a>
+        </div>
+        <%}%>
+        </div>
+
+    </div>
+</body>
+</html>
