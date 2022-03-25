@@ -1,5 +1,8 @@
 # Web_Shop_Amila_Dzambo
 # This is a Web Shop project I did for our class at the University. For the backend, I used Node.js. I did frontend in EJS, and I used the PostgreSQL database.
+
+YouTube link : https://www.youtube.com/watch?v=B34tZzhyz1s ->  Recording of all of the application's possibilities and features.
+
 This website is for the customers to find and order products from shops of various kinds and for the merchants to create their online shop to put up and sell their 
 products. The application allows all types of shops(clothes, technology, markets, etc.) and customer services(instructions, repairman, etc.). There are three variants of 
 users: main administrator, merchant, and customer.
