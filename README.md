@@ -12,10 +12,7 @@ etc.) at any time, add new products to the shop, delete or edit the existing one
 time someone orders something from his shop. He can decline or accept the order and he always has information about all the orders placed as well as information on his 
 earnings. 
 
-The customer is a user who registers into the app by inserting the required information. After log in, his front-page contains the most popular products, products recommended
-based on his inserted interests, and some random recommended products. He can easily search for any product and shop through a search input. Customers can search shop 
-profiles, list through the shop's catalog, and place orders. He gets an email about his order's status for every order He places and has access to the information of all
-the orders He created. He has the right to rate every shop and every product. 
+The customer is a user who registers into the app by inserting the required information. After log in, his front-page contains the most popular products, products recommended based on his inserted interests, and some random recommended products. He can easily search for any product and shop through a search input. Customers can search shop profiles, list through the shop's catalog, and place orders. He gets an email about his order's status for every order He places and has access to the information on all the orders He created. He has the right to rate every shop and every product. 
 
 Customers, merchants, and the main admin can communicate with one another through a chat. 
 
