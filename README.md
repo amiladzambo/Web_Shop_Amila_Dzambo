@@ -7,7 +7,7 @@ users: main administrator, merchant, and customer.
 The main administrator has access to all the merchants and customers registered to the website. He can edit(block, activate, deactivate) their accounts and access the
 application's statistics(number of merchants, number of customers, number of orders, etc.). He can search, look and delete merchant's products if necessary.
 
-The merchant is a user who registrants his shop by inserting the required information. He can log in and edit his profile(username, profile image, cover image, email, 
+The merchant is a user who registers his shop by inserting the required information. He can log in and edit his profile(username, profile image, cover image, email, 
 etc.) at any time, add new products to the shop, delete or edit the existing ones. He can very easily find his product through a search input. Notifications appear every
 time someone orders something from his shop. He can decline or accept the order and he always has information about all the orders placed as well as information on his 
 earnings. 
